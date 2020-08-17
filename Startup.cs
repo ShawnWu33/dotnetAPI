@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
-
+using TodoApi.Repositories;
 
 namespace TodoAPi
 {
@@ -23,6 +23,7 @@ namespace TodoAPi
         {
             services.AddDbContext<TodoContext>(opt => 
                 opt.UseInMemoryDatabase("TodoList"));
+            services.AddScoped<ITodoItemRepo, TodoItemRepo>();
             services.AddControllers();
         }
 

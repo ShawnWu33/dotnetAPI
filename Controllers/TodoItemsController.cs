@@ -5,20 +5,25 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using TodoApi.Models;
 using TodoApi.Repositories;
+using TodoAPi.ActionFilters;
 
 namespace TodoAPi.Controllers
 {
+    [ServiceFilter(typeof(LoggingActionFilter))]
     [Route("api/[controller]")]
     [ApiController]
     public class TodoItemsController : ControllerBase
     {
         private readonly ITodoItemRepo _todoItemRepo;
+        private readonly ILogger _logger;
 
-        public TodoItemsController(ITodoItemRepo todoItemRepo)
+        public TodoItemsController(ITodoItemRepo todoItemRepo, ILogger<TodoItemsController> logger)
         {
             _todoItemRepo = todoItemRepo;
+            _logger = logger;
         }
 
         // GET: api/TodoItems
@@ -28,6 +33,7 @@ namespace TodoAPi.Controllers
             var result = await _todoItemRepo.get();
 
             return Ok(result);
+            
         }
 
         // GET: api/TodoItems/5

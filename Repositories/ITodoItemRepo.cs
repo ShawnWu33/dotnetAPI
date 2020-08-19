@@ -1,4 +1,4 @@
-namespace TodoApi.Repositories
+namespace TodoAPI.Repositories
 {
     public interface ITodoItemRepo : IRepo<TodoItem> {
 

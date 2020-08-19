@@ -1,6 +1,6 @@
 using System;
 
-namespace TodoAPi.Operations
+namespace TodoAPI.Operations
 {
     public class Operation : IOperationTransient, IOperationScoped, IOperationSingleton
     {

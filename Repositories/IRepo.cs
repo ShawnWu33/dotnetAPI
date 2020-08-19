@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace TodoApi.Repositories
+namespace TodoAPI.Repositories
 {
     public interface IRepo<T> {
         Task<IEnumerable<T>> get(int pageNumber = 1, int pageSize = 10);

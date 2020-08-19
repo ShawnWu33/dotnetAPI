@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TodoApi.Models;
+using TodoAPI.Models;
 
-namespace TodoApi.Repositories
+namespace TodoAPI.Repositories
 {
     public class TodoItemRepo : ITodoItemRepo
     {

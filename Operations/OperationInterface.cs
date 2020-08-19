@@ -1,4 +1,4 @@
-namespace TodoAPi.Operations
+namespace TodoAPI.Operations
 {
     public interface IOperation
     {

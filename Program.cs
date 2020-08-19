@@ -4,7 +4,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using NLog.Web;
 
-namespace TodoAPi
+namespace TodoAPI
 {
     public class Program
     {

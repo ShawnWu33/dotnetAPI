@@ -2,9 +2,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using TodoAPi.Operations;
+using TodoAPI.Operations;
 
-namespace TodoAPi.Middlewares
+namespace TodoAPI.Middlewares
 {
     public class RequestResponseLoggingMiddleware
     {
@@ -24,14 +24,14 @@ namespace TodoAPi.Middlewares
         public async Task InvokeAsync(HttpContext context, IOperationScoped scopedOperation)
         {
             var operationId = scopedOperation.OperationId;
-            var request = context.Request;
+            var request = context.Request;          
             _logger.LogInformation(" Scoped ID: {0} | Request: {1} {2} ", operationId, request.Method, request.Path);
 
             // Call the next delegate/middleware in the pipeline
             await _next(context);
 
             var response = context.Response;
-            _logger.LogInformation(" Scoped ID: {0} | Response: {1}",operationId, response.StatusCode);
+            _logger.LogInformation(" Scoped ID: {0} | Response: {1}", operationId, response.StatusCode);
         }
     }
 

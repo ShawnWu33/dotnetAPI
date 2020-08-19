@@ -6,7 +6,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
 using TodoApi.Repositories;
-using TodoAPi.ActionFilters;
+using TodoAPi.Middlewares;
+
 
 namespace TodoAPi
 {
@@ -25,7 +26,6 @@ namespace TodoAPi
             services.AddDbContext<TodoContext>(opt => 
                 opt.UseInMemoryDatabase("TodoList"));
             services.AddScoped<ITodoItemRepo, TodoItemRepo>();
-            services.AddScoped<LoggingActionFilter>();
             services.AddControllers();
         }
 
@@ -42,6 +42,16 @@ namespace TodoAPi
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.Use(async (context, next) => // example of inline middleware
+            {
+                // Do work that doesn't write to the Response.
+                await next.Invoke();
+                // Do logging or other work that doesn't write to the Response.
+            });
+
+            // customized middleware
+            app.UseRequestResponseLogging();
 
             app.UseEndpoints(endpoints =>
             {

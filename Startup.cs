@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
 using TodoApi.Repositories;
 using TodoAPi.Middlewares;
+using TodoAPi.Operations;
 
 
 namespace TodoAPi
@@ -23,7 +24,12 @@ namespace TodoAPi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<TodoContext>(opt => 
+            // Add Operation for generate operation ID for every instances created by DI
+            services.AddTransient<IOperationTransient, Operation>();
+            services.AddScoped<IOperationScoped, Operation>();
+            services.AddSingleton<IOperationSingleton, Operation>();
+
+            services.AddDbContext<TodoContext>(opt =>
                 opt.UseInMemoryDatabase("TodoList"));
             services.AddScoped<ITodoItemRepo, TodoItemRepo>();
             services.AddControllers();

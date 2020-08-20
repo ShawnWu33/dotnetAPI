@@ -31,17 +31,18 @@ namespace TodoAPI.Tests
                     IsComplete = false
                 }
             };
-            return result;
+            return await Task.FromResult(result);
 
         }
 
         public async Task<TodoItem> getById(long id)
         {
-            return new TodoItem{
+            var result =  new TodoItem{
                 Id = id,
                 name = "fake item",
                 IsComplete = false
             };
+            return await Task.FromResult(result);
         }
 
         public Task<TodoItem> update(long id, TodoItem entity)

@@ -8,9 +8,15 @@ namespace TodoAPI
 {
     public class Program
     {
+        [Obsolete]
         public static void Main(string[] args)
         {
-            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            // Set logs output directory based on runtime environment
+            var environment =  Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var logger = 
+                environment == Microsoft.AspNetCore.Hosting.EnvironmentName.Development 
+                ? NLogBuilder.ConfigureNLog("nlog.dev.config").GetCurrentClassLogger() 
+                : NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
                 logger.Debug("init main");

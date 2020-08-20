@@ -17,7 +17,11 @@ namespace TodoAPI.Repositories
 
         public async Task<TodoItem> add(TodoItem entity)
         {
+            var timestamp = DateTime.UtcNow;
+            entity.CreatedAt = timestamp;
+            entity.ModifiedAt = timestamp;
             _context.TodoItems.Add(entity);
+            
             await _context.SaveChangesAsync();
             return entity;
         }
@@ -48,6 +52,7 @@ namespace TodoAPI.Repositories
 
         public async Task<TodoItem> update(long id, TodoItem entity)
         {
+            entity.ModifiedAt = DateTime.UtcNow;
             _context.Entry(entity).State = EntityState.Modified;
 
             try

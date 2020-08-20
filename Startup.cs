@@ -30,8 +30,8 @@ namespace TodoAPI
             services.AddSingleton<IOperationSingleton, Operation>();
 
             services.AddDbContext<TodoContext>(opt =>
-                opt.UseInMemoryDatabase("TodoList"));
-            services.AddScoped<ITodoItemRepo, TodoItemRepo>();
+                opt.UseSqlite("Filename=MyDatabase.db"));
+            services.AddScoped<ITodoItemRepo, TodoItemRepo>();  
             services.AddControllers();
         }
 

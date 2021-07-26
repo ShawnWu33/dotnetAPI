@@ -1,11 +1,4 @@
 {
-    "sqltools.connections": [
-        {
-            "database": "${workspaceFolder:dotnetAPI}/MyDatabase.db",
-            "driver": "SQLite",
-            "name": "localSqliteDB",
-            "previewLimit": 50
-        }
-    ],
+    "sqltools.connections": [],
     "sqltools.useNodeRuntime": true
 }
